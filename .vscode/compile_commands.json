@@ -1,0 +1,11 @@
+[
+{
+  "directory": "c:\\Users\\xj\\cpp\\c-containers",
+  "arguments": ["C:\\msys2\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe", "-c", "-m64", "-g", "-O0", "-Iinclude", "-I.", "-o", "build\\.objs\\test_list\\mingw\\x86_64\\debug\\test\\test_list.c.obj", "test\\test_list.c"],
+  "file": "test\\test_list.c"
+},
+{
+  "directory": "c:\\Users\\xj\\cpp\\c-containers",
+  "arguments": ["C:\\msys2\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe", "-c", "-m64", "-g", "-O0", "-Iinclude", "-o", "build\\.objs\\containers\\mingw\\x86_64\\debug\\src\\list\\dlist.c.obj", "src\\list\\dlist.c"],
+  "file": "src\\list\\dlist.c"
+}]
