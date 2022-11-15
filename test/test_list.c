@@ -29,10 +29,10 @@ string show_int(c_ref data, size_t index)
     switch (index)
     {
         case 0: 
-            n = sprintf(s, "[%d,", *(int*)data);
+            n = sprintf(s, "{%d,", *(int*)data);
             break;
         case 3:
-            n = sprintf(s, "%d]", *(int*)data);
+            n = sprintf(s, "%d}", *(int*)data);
             break;
         default:
             n = sprintf(s, "%d,", *(int*)data);
@@ -211,13 +211,43 @@ CESTER_TEST(converting_a_list_to_a_string, inst,
     cester_assert_int_eq(3, dlist_get_size(lst));
 
     string lst_str = dlist_show(lst, show_int);
-    cester_assert_str_eq("[1,2,3,", lst_str);
+    cester_assert_str_eq("{1,2,3,", lst_str);
     free(lst_str);
 
     int x = 89;
     node_ref new_node = dlist_append(lst, &x, sizeof(x));
     lst_str = dlist_show(lst, show_int);
-    cester_assert_str_eq("[1,2,3,89]", lst_str);
+    cester_assert_str_eq("{1,2,3,89}", lst_str);
+    free(lst_str);
+)
+
+CESTER_TEST(inserting_elements_into_a_list, inst,
+    list_ref lst = inst->arg;
+
+    cester_assert_int_eq(0, dlist_get_size(lst));
+
+    int a[4] = {1,2,3,4};
+
+    node_ref inserted_node = dlist_insert(lst, 0, &a[0], sizeof(int));
+    cester_assert_int_eq(1, dlist_get_size(lst));
+
+    inserted_node = dlist_insert(lst, 1, &a[1], sizeof(int));
+    cester_assert_int_eq(2, dlist_get_size(lst));
+
+    inserted_node = dlist_insert(lst, 1, &a[2], sizeof(int));
+    cester_assert_int_eq(3, dlist_get_size(lst));
+
+    inserted_node = dlist_insert(lst, 3, &a[3], sizeof(int));
+    cester_assert_int_eq(4, dlist_get_size(lst));
+
+    inserted_node = dlist_insert(lst, -1, &a[3], sizeof(int));
+    cester_assert_null(inserted_node);
+
+    inserted_node = dlist_insert(lst, 10, &a[3], sizeof(int));
+    cester_assert_null(inserted_node);
+
+    string lst_str = dlist_show(lst, show_int);
+    cester_assert_str_eq("{1,3,2,4}", lst_str);
     free(lst_str);
 )
 

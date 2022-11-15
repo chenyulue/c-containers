@@ -10,7 +10,7 @@ target("test_list")
     add_deps("containers")
     add_includedirs(".")
     add_files("test/test_list.c")
-    -- add_defines("CIRCULAR_LIST")
+--    add_defines("CIRCULAR_LIST")
 
 --
 -- If you want to known more usage about xmake, please see https://xmake.io

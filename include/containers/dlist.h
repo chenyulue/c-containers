@@ -11,6 +11,7 @@ list_ref dlist_delete_all(list_ref lst);
 list_ref dlist_destroy(list_ref lst);
 c_ref dlist_get_at(list_ref lst, size_t index);
 string dlist_show(list_ref lst, cref_to_string show_fun);
+node_ref dlist_insert(list_ref lst, size_t index, c_ref data, size_t data_size);
 
 /* Utility functions to get information of a list. */
 

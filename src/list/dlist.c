@@ -206,6 +206,37 @@ string dlist_show(list_ref lst, cref_to_string show_fun)
     return lst_str;
 }
 
+node_ref dlist_insert(list_ref lst, size_t index, c_ref data, size_t data_size)
+{
+    if (index == 0) 
+    {
+        return dlist_prepend(lst, data, data_size);
+    } else if (index == dlist_get_size(lst))
+    {
+        return dlist_append(lst, data, data_size);
+    } else if (index > dlist_get_size(lst))
+    {
+        return NULL;
+    } else
+    {
+        node_ref current_node = lst->head;
+        for (int i = 0; i < index; i++)
+        {
+            current_node = current_node->next;
+        }
+
+        node_ref new_node = dlist_make_node(data, data_size);
+        new_node->next = current_node;
+        new_node->prec = current_node->prec;
+        current_node->prec->next = new_node;
+        current_node->prec = new_node;
+
+        lst->size++;
+
+        return new_node;
+    }
+}
+
 /* Functions to get information of a list. */
 
 size_t dlist_get_size(list_ref lst)
